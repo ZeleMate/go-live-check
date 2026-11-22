@@ -15,6 +15,7 @@ func TestRun(t *testing.T) {
 	}{
 		{name: "greets", args: nil, wantCode: 0, wantOut: "Hello, world!\n"},
 		{name: "prints the version", args: []string{"--version"}, wantCode: 0, wantOut: "dev\n"},
+		{name: "greets by name", args: []string{"--name", "Go"}, wantCode: 0, wantOut: "Hello, Go!\n"},
 		{name: "rejects an unknown flag", args: []string{"--nope"}, wantCode: 2, wantOut: ""},
 	}
 	for _, tt := range tests {

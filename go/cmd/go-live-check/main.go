@@ -20,10 +20,11 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags := flag.NewFlagSet("go-live-check", flag.ContinueOnError)
 	flags.SetOutput(stderr)
 	showVersion := flags.Bool("version", false, "print the version and exit")
+	name := flags.String("name", "world", "who to greet")
 	if err := flags.Parse(args); err != nil {
 		return 2
 	}
-	out := greeting.Greet("world")
+	out := greeting.Greet(*name)
 	if *showVersion {
 		out = version
 	}
