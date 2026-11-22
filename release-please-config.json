@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "include-component-in-tag": true,
+  "draft": true,
+  "force-tag-creation": true,
+  "packages": {
+    "python": {
+      "release-type": "python",
+      "package-name": "go-live-check",
+      "component": "python",
+      "extra-files": [
+        {
+          "type": "toml",
+          "path": "uv.lock",
+          "jsonpath": "$.package[?(@.name.value=='go-live-check')].version"
+        }
+      ]
+    },
+    "go": {
+      "release-type": "go",
+      "package-name": "go-live-check",
+      "component": "go",
+      "bump-minor-pre-major": true,
+      "tag-separator": "/"
+    }
+  }
+}

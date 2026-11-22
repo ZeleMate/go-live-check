@@ -1,0 +1,28 @@
+# Contributing
+
+This is a one-person project. Issues and bug reports are welcome. For larger changes, open an issue first so we can agree on the approach.
+
+## Workflow
+
+1. Branch from `main`.
+2. Make the change with tests. Run the commands in [AGENTS.md](AGENTS.md).
+3. Open a PR with a Conventional Commits title (`feat: …`, `fix: …`). It is squash-merged.
+4. CI (`ci-ok`) must pass. Review comments must be resolved.
+
+## Releasing a new major version
+
+Go has no `/v0` or `/v1` paths, but from v2 on the module path must end in the major version (`/v2`, `/v3`, …), or Go rejects the tag. The `go-major-version` hook fails the merge gate on a release PR that would tag v2 or later without it.
+
+**Leaving v0.** In 0.x a breaking change bumps the minor version. To release 1.0.0, merge a commit with a `Release-As: 1.0.0` footer.
+
+**v2 and later.** Before the breaking change is released:
+
+1. Run `copier update --trust --defaults -d go_module=github.com/ZeleMate/go-live-check/go/v2` (with your current path, and the new major). It rewrites `go.mod`'s `module` line, and later template updates keep the new path.
+2. Rewrite the internal imports to the `/v2` path.
+3. Merge with a breaking-change commit (`feat!:`). release-please proposes 2.0.0, and the hook passes.
+
+`go.mod` stays where it is; there's no `v2/` folder. Binaries need the new path too: `go install github.com/ZeleMate/go-live-check/go/v2/cmd/go-live-check@v2.0.0`.
+
+golangci-lint has no local version pin: CI pins it, and gofmt and goimports output barely changes between versions.
+
+Security issues: see [SECURITY.md](SECURITY.md).

@@ -1,0 +1,42 @@
+# Secrets — never commit
+.env
+.env.*
+*.pem
+*.key
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Virtualenvs (the CI tools in .github/tools have one too)
+.venv/
+
+# Claude Code personal files
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+build/
+*.egg-info/
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Go (release binaries are built only in CI)
+coverage.out
+*.test
+/go/go-live-check
+
+# Keep last: template files that broad rules above (`.python-version`, `/*.json`) must not hide.
+!/release-please-config.json
+!/.release-please-manifest.json
+!.github/tools/.python-version
